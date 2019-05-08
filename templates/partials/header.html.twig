@@ -1,4 +1,4 @@
-<div class="container-fluid" id="header">
+<div class="container-fluid pb-3 pt-2" id="header">
     <div class="row pt-3">
         <div class="col-1">
             <img src="{{ asset('logocsv.png') }}" alt="logocsv">
@@ -28,13 +28,13 @@
                             <a class="nav-link" href="#">CONVOCATIONS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">PHOTOS</a>
+                            <a class="nav-link" href="{{ path('photo') }}">PHOTOS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">FORUM</a>
+                            <a class="nav-link" href="{{ path('forum') }}">FORUM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">CONNEXION</a>
+                            <a class="nav-link" href="{{ path('connection') }}">CONNEXION</a>
                         </li>
                     </ul>
                 </div>
