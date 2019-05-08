@@ -1,7 +1,7 @@
 <div class="container-fluid" id="header">
-    <div class="row mt-3">
+    <div class="row pt-3">
         <div class="col-1">
-            <img src="/logocsv.png'" alt="logocsv">
+            <img src="{{ asset('logocsv.png') }}" alt="logocsv">
         </div>
         <div class="col-11">
             <div class="row">
@@ -9,14 +9,14 @@
                     <h1>CCSVA MONT-SOUS-VAUDREY FOOTBALL</h1>
                 </div>
                 <div class="col-1">
-                    <i class="fab fa-facebook"></i>
+                    <a href="https://www.facebook.com/CCSVA-1682686888654597/"><i class="fab fa-facebook"></i></a>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-12">
                     <ul class="nav nav-pills nav-fill">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">ACCUEIL<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ path('home') }}">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">LE CLUB</a>
