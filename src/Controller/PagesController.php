@@ -36,14 +36,4 @@ class PagesController extends AbstractController
 	{
 		return $this->render('/forum.html.twig');
 	}
-
-	/**
-	 * Accès à la page connexion
-	 *
-	 * @Route("/connection", name="connection")
-	 */
-	public function connection()
-	{
-		return $this->render('/connection.html.twig');
-	}
 }

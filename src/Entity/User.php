@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -19,6 +20,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Email(message = "L'email n'est pas valide", checkMX=true)
      */
     private $email;
 
@@ -30,21 +34,35 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Length(min=6, minMessage="Le mot de passe doit contenir 6 caractères minimum")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Length(min=4, max=255, minMessage="Le nom doit faire 4 caractères minimum", maxMessage="Le nom ne peut pas faire plus de 255 caractères")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Length(min=4, max=255, minMessage="Le prénom doit faire 4 caractères minimum", maxMessage="Le prénom ne peut pas faire plus de 255 caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="integer")
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Type("integer", message="L'âge doit être écrit en chiffre")
+	 * @Assert\Length(max=3, minMessage="L'âge ne peut pas faire plus de 3 caractères")
+	 *
      */
     private $age;
 

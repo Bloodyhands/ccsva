@@ -17,6 +17,10 @@ security:
         main:
             anonymous: true
 
+            form_login:
+                login_path: account_connection
+                check_path: account_connection
+
             # activate different ways to authenticate
 
             # http_basic: true
