@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ImageRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CallingRepository")
  */
-class Image
+class Calling
 {
     /**
      * @ORM\Id()
@@ -21,25 +21,20 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    private $competition;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Staff", mappedBy="images")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Staff", mappedBy="callings")
      */
     private $staffs;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="images")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Team", mappedBy="callings")
      */
     private $teams;
 
@@ -47,7 +42,6 @@ class Image
     {
         $this->staffs = new ArrayCollection();
         $this->teams = new ArrayCollection();
-        $this->accounts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,38 +49,26 @@ class Image
         return $this->id;
     }
 
-    public function getType(): ?string
+    public function getCompetition(): ?string
     {
-        return $this->type;
+        return $this->competition;
     }
 
-    public function setType(string $type): self
+    public function setCompetition(string $competition): self
     {
-        $this->type = $type;
+        $this->competition = $competition;
 
         return $this;
     }
 
-    public function getName(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->name;
+        return $this->date;
     }
 
-    public function setName(string $name): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+        $this->date = $date;
 
         return $this;
     }
@@ -103,7 +85,7 @@ class Image
     {
         if (!$this->staffs->contains($staff)) {
             $this->staffs[] = $staff;
-            $staff->setImages($this);
+            $staff->addCalling($this);
         }
 
         return $this;
@@ -113,10 +95,7 @@ class Image
     {
         if ($this->staffs->contains($staff)) {
             $this->staffs->removeElement($staff);
-            // set the owning side to null (unless already changed)
-            if ($staff->getImages() === $this) {
-                $staff->setImages(null);
-            }
+            $staff->removeCalling($this);
         }
 
         return $this;
@@ -134,7 +113,7 @@ class Image
     {
         if (!$this->teams->contains($team)) {
             $this->teams[] = $team;
-            $team->setImages($this);
+            $team->addCalling($this);
         }
 
         return $this;
@@ -144,10 +123,7 @@ class Image
     {
         if ($this->teams->contains($team)) {
             $this->teams->removeElement($team);
-            // set the owning side to null (unless already changed)
-            if ($team->getImages() === $this) {
-                $team->setImages(null);
-            }
+            $team->removeCalling($this);
         }
 
         return $this;

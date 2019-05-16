@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\DivisionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\StaffRepository")
  */
-class Division
+class Staff extends Account
 {
     /**
      * @ORM\Id()
@@ -21,22 +21,22 @@ class Division
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private $position;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="divisions")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Team", inversedBy="staffs")
      */
     private $teams;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Calling", inversedBy="staffs")
+     */
+    private $callings;
+
     public function __construct()
     {
-        $this->images = new ArrayCollection();
         $this->teams = new ArrayCollection();
+        $this->callings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -44,26 +44,14 @@ class Division
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getPosition(): ?string
     {
-        return $this->name;
+        return $this->position;
     }
 
-    public function setName(string $name): self
+    public function setPosition(string $position): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+        $this->position = $position;
 
         return $this;
     }
@@ -80,7 +68,6 @@ class Division
     {
         if (!$this->teams->contains($team)) {
             $this->teams[] = $team;
-            $team->setDivisions($this);
         }
 
         return $this;
@@ -90,10 +77,32 @@ class Division
     {
         if ($this->teams->contains($team)) {
             $this->teams->removeElement($team);
-            // set the owning side to null (unless already changed)
-            if ($team->getDivisions() === $this) {
-                $team->setDivisions(null);
-            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Calling[]
+     */
+    public function getCallings(): Collection
+    {
+        return $this->callings;
+    }
+
+    public function addCalling(Calling $calling): self
+    {
+        if (!$this->callings->contains($calling)) {
+            $this->callings[] = $calling;
+        }
+
+        return $this;
+    }
+
+    public function removeCalling(Calling $calling): self
+    {
+        if ($this->callings->contains($calling)) {
+            $this->callings->removeElement($calling);
         }
 
         return $this;

@@ -1,0 +1,51 @@
+<div class="container-fluid pb-3 pt-2" id="header">
+    <div class="row pt-3">
+        <div class="col-1">
+            <img src="{{ asset('logocsv.png') }}" alt="logocsv">
+        </div>
+        <div class="col-11">
+            <div class="row">
+                <div class="col-11 text-center">
+                    <h1>CCSVA MONT-SOUS-VAUDREY FOOTBALL</h1>
+                </div>
+                <div class="col-1">
+                    <a href="https://www.facebook.com/CCSVA-1682686888654597/"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('home') }}">ACCUEIL<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">LE CLUB</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">LES EQUIPES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CONVOCATIONS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('photo') }}">PHOTOS</a>
+                        </li>
+                        {% if app.user %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMINISTRATION</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('admin') }}">ADMINISTRATION</a>
+                                    <a class="dropdown-item" href="{{ path('account_deconnection') }}">DECONNEXION</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('account_connection') }}">CONNEXION</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

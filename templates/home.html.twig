@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% set homepage = true %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+    {% include 'partials/facebookWall.html.twig' %}
+
+    {% include 'partials/match.html.twig' %}
+
+    {% include 'partials/ranking.html.twig' %}
+
+{% endblock %}
