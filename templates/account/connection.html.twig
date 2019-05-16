@@ -7,37 +7,31 @@
 {% block body %}
 
     <div class="row justify-content-center mt-5">
-        <h4>Identifiez-vous sur CCSVA</h4>
+        <h4>Accès à l'administration</h4>
     </div>
-    <div class="row mt-3" id="connexion">
-        <div class="col-3 offset-3 text-center">
-            <div class="card bg-light mb-3" style="max-width: 18rem;">
-                <div class="card-header"><strong>J'ai déjà un compte</strong></div>
-                <div class="card-body">
-                    <form action="{{ path('account_connection') }}" method="post">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" name="_username" id="email" class="form-control" placeholder="Adresse email..." required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Mot de passe</label>
-                            <input type="password" name="_password" id="password" class="form-control" placeholder="Mot de passe..." required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Connexion</button>
-                        </div>
-                    </form>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-3 text-center">
-            <div class="card bg-light mb-3" style="max-width: 18rem;">
-                <div class="card-header"><strong>Je n'ai pas encore de compte</strong></div>
-                <div class="card-body">
-                    <h6 class="card-title">Créer un compte utilisateur</h6>
-                    <p class="card-text"></p>
-                </div>
+
+    {% if hasError %}
+        <div class="alert alert-danger text-center mt-4 mb-4">Une erreur est survenue, le nom d'utilisateur ou le mot de passe est incorrect</div>
+    {% endif %}
+
+    <div class="row justify-content-center mt-3" id="connexion">
+        <div class="card bg-light mb-3 text-center" style="max-width: 18rem;">
+            <div class="card-header"><strong>J'ai déjà un compte</strong></div>
+            <div class="card-body">
+                <form action="{{ path('account_connection') }}" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" name="_username" id="email" class="form-control" placeholder="Adresse email..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" name="_password" id="password" class="form-control" placeholder="Mot de passe..." required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Connexion</button>
+                    </div>
+                </form>
+                </p>
             </div>
         </div>
     </div>

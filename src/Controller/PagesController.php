@@ -26,14 +26,4 @@ class PagesController extends AbstractController
 	{
 		return $this->render('/photo.html.twig');
 	}
-
-	/**
-	 * Accès à la page forum
-	 *
-	 * @Route("/forum", name="forum")
-	 */
-	public function forum()
-	{
-		return $this->render('/forum.html.twig');
-	}
 }

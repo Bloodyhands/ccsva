@@ -14,7 +14,7 @@
             </div>
             <div class="row mt-4">
                 <div class="col-12">
-                    <ul class="nav nav-pills nav-fill">
+                    <ul class="nav nav-tabs nav-fill">
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ path('home') }}">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
@@ -30,12 +30,19 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('photo') }}">PHOTOS</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('forum') }}">FORUM</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('account_connection') }}">CONNEXION</a>
-                        </li>
+                        {% if app.user %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ADMINISTRATION</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path('admin') }}">ADMINISTRATION</a>
+                                    <a class="dropdown-item" href="{{ path('account_deconnection') }}">DECONNEXION</a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('account_connection') }}">CONNEXION</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
