@@ -10,7 +10,6 @@ class AdminController extends AbstractController
 {
     /**
      * @Route("/admin", name="admin")
-	 * @IsGranted("ROLE_ADMIN", message="Vous ne pouvez pas accéder à l'administration si vous n'êtes pas administrateur")
      */
     public function admin()
     {
