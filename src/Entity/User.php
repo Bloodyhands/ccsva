@@ -9,15 +9,34 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User extends Account implements UserInterface
+class User implements UserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @ORM\Id()
+	 * @ORM\GeneratedValue()
+	 * @ORM\Column(type="integer")
+	 */
+	protected $id;
 
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	protected $name;
+
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	protected $firstname;
+
+	/**
+	 * @ORM\Column(type="date")
+	 */
+	protected $birthdate;
+
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	protected $email;
     /**
      * @ORM\Column(type="json")
      */
@@ -29,10 +48,85 @@ class User extends Account implements UserInterface
      */
     private $password;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	/**
+	 * @return mixed
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @param mixed $id
+	 */
+	public function setId($id): void
+	{
+		$this->id = $id;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @param mixed $name
+	 */
+	public function setName($name): void
+	{
+		$this->name = $name;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getFirstname()
+	{
+		return $this->firstname;
+	}
+
+	/**
+	 * @param mixed $firstname
+	 */
+	public function setFirstname($firstname): void
+	{
+		$this->firstname = $firstname;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getBirthdate()
+	{
+		return $this->birthdate;
+	}
+
+	/**
+	 * @param mixed $birthdate
+	 */
+	public function setBirthdate($birthdate): void
+	{
+		$this->birthdate = $birthdate;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getEmail()
+	{
+		return $this->email;
+	}
+
+	/**
+	 * @param mixed $email
+	 */
+	public function setEmail($email): void
+	{
+		$this->email = $email;
+	}
 
     /**
      * A visual identifier that represents this user.

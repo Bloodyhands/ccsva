@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de {{ staff.firstname}} {{ staff.name }}{% endblock %}
+
+{% block body %}
+
+    <h4>Modification du joueur ou encadrement {{ staff.firstname }} {{ staff.name }}</h4>
+    <div class="row">
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}
