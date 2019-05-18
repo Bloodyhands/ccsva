@@ -2,28 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\Calling;
+use App\Entity\Match;
+use App\Entity\Staff;
+use App\Form\StaffType;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin()
-    {
-		return $this->render('admin/admin.html.twig');
-    }
-
 	/**
-	 * @Route("/admin/gestionDesJoueurs", name="admin_player")
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @Route("/admin", name="admin")
 	 */
-    public function adminPlayer()
+	public function admin()
 	{
-		return $this->render('admin/player.html.twig');
+		$staff = new Staff();
+		return $this->render('admin/admin.html.twig', [
+			'staff' => $staff
+		]);
 	}
 
 	/**

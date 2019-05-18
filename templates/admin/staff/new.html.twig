@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout des joueurs et encadrements{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-center mt-4">
+        <h4>Ajout des joueurs et encadrements</h4>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            {{ form_start(form) }}
+
+            {{ form_row(form.name) }}
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.birthdate) }}
+            {{ form_row(form.position) }}
+
+            <button type="submit" class="btn btn-success">Créer la fiche du joueur ou encadrement</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}
