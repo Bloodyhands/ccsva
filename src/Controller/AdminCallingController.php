@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Calling;
+use App\Entity\Staff;
 use App\Form\CallingType;
+use App\Service\SendEmail;
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,10 +25,11 @@ class AdminCallingController extends AbstractController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 * @throws \Exception
 	 */
-	public function newCalling(Request $request, ObjectManager $manager)
+	public function newCalling(Request $request, ObjectManager $manager, SendEmail $sendEmail)
 	{
 		$calling = new Calling();
 		$createdAt = new DateTime();
+		$staff = new Staff();
 
 		$form = $this->createForm(CallingType::class, $calling);
 
@@ -45,6 +48,8 @@ class AdminCallingController extends AbstractController
 
 			return $this->redirectToRoute('admin');
 		}
+		$sendEmail->mail($calling, $staff);
+
 		return $this->render('admin/calling/new.html.twig', array(
 			'form' => $form->createView(),
 		));

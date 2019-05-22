@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Staff;
 use App\Form\StaffType;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +19,7 @@ class AdminStaffController extends AbstractController
 	 *
 	 * @return Response
 	 */
-	public function adminAddStaff(Request $request, ObjectManager $manager)
+	public function createStaff(Request $request, ObjectManager $manager)
 	{
 		$staff = new Staff();
 		$form = $this->createForm(StaffType::class, $staff);
@@ -52,7 +51,7 @@ class AdminStaffController extends AbstractController
 	 * @param Staff $staff
 	 * @return Response
 	 */
-	public function adminEditStaff(Staff $staff, Request $request, ObjectManager $manager)
+	public function updateStaff(Staff $staff, Request $request, ObjectManager $manager)
 	{
 		$form = $this->createForm(StaffType::class, $staff);
 
