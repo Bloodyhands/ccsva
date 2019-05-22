@@ -1,20 +1,25 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\AdminPage;
 
 use App\Entity\Staff;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use App\Repository\StaffRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class StaffCallingType extends ApplicationType
+class AdminStaffType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', ChoiceType::class, $this->getConfiguration('Joueur n°', '', [
-
-			]))
+            ->add('staffs', EntityType::class, [
+            	'class' => Staff::class,
+				'choice_label' => 'name',
+				'expanded' => false,
+				'multiple' => false
+			])
         ;
     }
 

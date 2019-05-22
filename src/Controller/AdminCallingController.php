@@ -26,7 +26,6 @@ class AdminCallingController extends AbstractController
 	public function newCalling(Request $request, ObjectManager $manager)
 	{
 		$calling = new Calling();
-
 		$createdAt = new DateTime();
 
 		$form = $this->createForm(CallingType::class, $calling);

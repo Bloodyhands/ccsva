@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Calling;
-use App\Entity\Match;
 use App\Entity\Staff;
-use App\Form\StaffType;
+use App\Form\AdminPage\AdminStaffType;
+use App\Repository\StaffRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,11 +17,19 @@ class AdminController extends AbstractController
 	/**
 	 * @Route("/admin", name="admin")
 	 */
-	public function admin()
+	public function admin(StaffRepository $repo, ObjectManager $manager, Request $request)
 	{
-		$staff = new Staff();
+		$staffs = $repo->findAll();
+		$form = $this->createForm(AdminStaffType::class, $staffs);
+
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			$manager->persist($staffs);
+			$manager->flush();
+		}
 		return $this->render('admin/admin.html.twig', [
-			'staff' => $staff
+			'staffs' => $staffs
 		]);
 	}
 

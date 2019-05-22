@@ -21,37 +21,47 @@ class Team
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $category;
+    protected $category;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Staff", mappedBy="teams")
      */
-    private $staffs;
+    protected $staffs;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Match", inversedBy="teams")
      */
-    private $matchs;
+    protected $matchs;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Division", inversedBy="teams")
      */
-    private $divisions;
+    protected $divisions;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Image", inversedBy="teams")
      */
-    private $images;
+    protected $images;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Calling", inversedBy="teams")
      */
-    private $callings;
+    protected $callings;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $opponent;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $home;
 
     public function __construct()
     {
@@ -189,6 +199,30 @@ class Team
         if ($this->callings->contains($calling)) {
             $this->callings->removeElement($calling);
         }
+
+        return $this;
+    }
+
+    public function getOpponent(): ?string
+    {
+        return $this->opponent;
+    }
+
+    public function setOpponent(string $opponent): self
+    {
+        $this->opponent = $opponent;
+
+        return $this;
+    }
+
+    public function getHome(): ?bool
+    {
+        return $this->home;
+    }
+
+    public function setHome(bool $home): self
+    {
+        $this->home = $home;
 
         return $this;
     }

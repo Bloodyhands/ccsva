@@ -3,10 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Calling;
+use App\Form\Collection\StaffCallingType;
+use App\Form\Configuration\ApplicationType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -22,10 +23,17 @@ class CallingType extends ApplicationType
 
 			]))
             ->add('competition', ChoiceType::class, $this->getConfiguration('Compétitions', '', [
-
+				'choices' => array(
+					'Championnat' => 0,
+					'Coupe du Jura' => 1,
+					'Coupe du conseil général' => 2,
+					'Coupe de Bourgogne-Franche-Comté' => 3,
+					'Coupe de France' => 4,
+					'Amical' => 5
+				)
 			]))
 			->add('opponent', TextType::class, $this->getConfiguration('Adversaire', ''))
-			->add('domicile', ChoiceType::class, $this->getConfiguration('', '', [
+			->add('home', ChoiceType::class, $this->getConfiguration('', '', [
 				'choices' => array(
 					'Domicile' => 1,
 					'Extérieur' => 0
