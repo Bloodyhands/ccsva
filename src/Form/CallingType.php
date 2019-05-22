@@ -32,7 +32,7 @@ class CallingType extends ApplicationType
 					'Amical' => 5
 				)
 			]))
-			->add('opponent', TextType::class, $this->getConfiguration('Adversaire', ''))
+			->add('teams', TextType::class, $this->getConfiguration('Adversaire', ''))
 			->add('home', ChoiceType::class, $this->getConfiguration('', '', [
 				'choices' => array(
 					'Domicile' => 1,
@@ -41,16 +41,9 @@ class CallingType extends ApplicationType
 				'expanded' => true,
 				'multiple' => false
 			]))
-            ->add('date', DateType::class, $this->getConfiguration('Date', '', [
-
-			]))
-            ->add('hours', TimeType::class, $this->getConfiguration('Heure du Match', '', [
-
-			]))
+            ->add('date', DateType::class, $this->getConfiguration('Date', ''))
 			->add('place', TextType::class, $this->getConfiguration('Lieu du RDV', ''))
-			->add('hoursRdv', TimeType::class, $this->getConfiguration('Heure du RDV', '', [
-
-			]))
+			->add('date', TimeType::class, $this->getConfiguration('Heure du RDV', ''))
 			->add('info', TextareaType::class, $this->getConfiguration('Infos complémentaire', ''))
 			->add('staffs', CollectionType::class, array(
 				'entry_type' => StaffCallingType::class,

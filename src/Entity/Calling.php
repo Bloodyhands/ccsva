@@ -28,15 +28,30 @@ class Calling
      */
     protected $date;
 
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	protected $home;
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Staff", mappedBy="callings")
      */
     protected $staffs;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Team", mappedBy="callings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="callings")
      */
     protected $teams;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $info;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $place;
 
     public function __construct()
     {
@@ -125,6 +140,42 @@ class Calling
             $this->teams->removeElement($team);
             $team->removeCalling($this);
         }
+
+        return $this;
+    }
+
+	public function getHome(): ?bool
+                  	{
+                  		return $this->home;
+                  	}
+
+	public function setHome(bool $home): self
+                  	{
+                  		$this->home = $home;
+                  
+                  		return $this;
+                  	}
+
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(?string $info): self
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    public function getPlace(): ?string
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?string $place): self
+    {
+        $this->place = $place;
 
         return $this;
     }

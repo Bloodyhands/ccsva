@@ -49,19 +49,9 @@ class Team
     protected $images;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Calling", inversedBy="teams")
+     * @ORM\OneToMany(targetEntity="App\Entity\Calling", mappedBy="teams")
      */
     protected $callings;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $opponent;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected $home;
 
     public function __construct()
     {
@@ -199,30 +189,6 @@ class Team
         if ($this->callings->contains($calling)) {
             $this->callings->removeElement($calling);
         }
-
-        return $this;
-    }
-
-    public function getOpponent(): ?string
-    {
-        return $this->opponent;
-    }
-
-    public function setOpponent(string $opponent): self
-    {
-        $this->opponent = $opponent;
-
-        return $this;
-    }
-
-    public function getHome(): ?bool
-    {
-        return $this->home;
-    }
-
-    public function setHome(bool $home): self
-    {
-        $this->home = $home;
 
         return $this;
     }
