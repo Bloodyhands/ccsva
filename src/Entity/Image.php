@@ -21,27 +21,27 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    protected $type;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Staff", mappedBy="images")
      */
-    private $staffs;
+    protected $staffs;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="images")
      */
-    private $teams;
+    protected $teams;
 
     public function __construct()
     {

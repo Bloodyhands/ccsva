@@ -21,22 +21,22 @@ class Match
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    protected $date;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $score;
+    protected $score;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Team", mappedBy="matchs")
      */
-    private $teams;
+    protected $teams;
 
     public function __construct()
     {
@@ -108,6 +108,18 @@ class Match
             $this->teams->removeElement($team);
             $team->removeMatch($this);
         }
+
+        return $this;
+    }
+
+    public function getCompetition(): ?string
+    {
+        return $this->competition;
+    }
+
+    public function setCompetition(string $competition): self
+    {
+        $this->competition = $competition;
 
         return $this;
     }

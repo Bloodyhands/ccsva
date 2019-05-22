@@ -21,17 +21,17 @@ class Division
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="divisions")
      */
-    private $teams;
+    protected $teams;
 
     public function __construct()
     {

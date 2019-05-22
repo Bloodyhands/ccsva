@@ -21,22 +21,22 @@ class Calling
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $competition;
+    protected $competition;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $date;
+    protected $date;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Staff", mappedBy="callings")
      */
-    private $staffs;
+    protected $staffs;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Team", mappedBy="callings")
      */
-    private $teams;
+    protected $teams;
 
     public function __construct()
     {

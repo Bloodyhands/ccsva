@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Staff;
+use App\Form\Configuration\ApplicationType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;

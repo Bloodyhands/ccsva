@@ -40,17 +40,17 @@ class Staff
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $position;
+    protected $position;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Team", inversedBy="staffs")
      */
-    private $teams;
+    protected $teams;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Calling", inversedBy="staffs")
      */
-    private $callings;
+    protected $callings;
 
     public function __construct()
     {
