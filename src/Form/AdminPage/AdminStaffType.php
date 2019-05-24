@@ -15,7 +15,9 @@ class AdminStaffType extends AbstractType
         $builder
             ->add('staff', EntityType::class, [
             	'class' => Staff::class,
-				'choice_label' => 'name',
+				'choice_label' => function ($staff) {
+            		return $staff->getFirstname().' '.$staff->getName();
+				},
 				'expanded' => false,
 				'multiple' => false,
 				'label' => false,

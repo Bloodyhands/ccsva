@@ -2,25 +2,94 @@
 
 {% block title %}Convocation{% endblock %}
 
+{% form_theme form _self %}
+
 {% block body %}
 
-    <div class="row justify-content-center mt-4">
+    <div class="row justify-content-center mt-4 mb-4">
         <h4>Convocation</h4>
     </div>
+    {{ form_start(form) }}
     <div class="row justify-content-center">
-        <div class="col-4">
-            {{ form_start(form) }}
-
-            {{ form_row(form.teams) }}
-            {{ form_row(form.competition) }}
-            {{ form_row(form.teams) }}
-            {{ form_row(form.home) }}
-            {{ form_row(form.date) }}
-
-            <button type="submit" class="btn btn-success">Envoyer la convocation</button>
-
-            {{ form_end(form) }}
+        <div class="col-6">
+            <div class="row justify-content-center mb-3">
+                <div class="col-8">
+                    {{ form_widget(form) }}
+                </div>
+            </div>
         </div>
     </div>
+    <div class="row justify-content-center mt-3">
+        <button type="submit" class="btn btn-success">Envoyer la convocation</button>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block _calling_staffs_widget %}
+
+    {{ form_widget(form) }}
+
+    <input type="hidden" id="widgets-counter" value="0">
+
+    <div class="form-group mb-5">
+        <button type="button" id="add-staff" class="btn btn-primary">Ajouter un joueur</button>
+    </div>
+
+{% endblock %}
+
+{% block _calling_staffs_entry_row %}
+
+    {{ form_widget(form) }}
+
+{% endblock %}
+
+{% block _calling_staffs_entry_widget %}
+
+    <div class="from-group" id="block_{{ id }}">
+        <div class="row mb-3">
+            <div class="col-10">
+                {{ form_widget(form.staff) }}
+            </div>
+            <div class="col-2">
+                <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('js/booking.js') }}"></script>
+    <script>
+		//Ajout des joueurs
+		$('#add-staff').click(function () {
+			//je récupère les numéros des futurs champs
+			const index = +$('#widgets-counter').val();
+
+			//je récupère le prototype des entrées
+			const tmpl = $('#calling_staffs').data('prototype').replace(/__name__/g, index);
+
+			//j'injecte le code au sein de la div
+			$('#calling_staffs').append(tmpl);
+
+			$('#widgets-counter').val(index + 1);
+
+			//je gère le bouton supprimer
+			handleDeleteButtons();
+		});
+
+		//Suppression des joueurs
+		function handleDeleteButtons() {
+			$('button[data-action="delete"]').click(function(){
+				const target = this.dataset.target;
+				$(target).remove();
+			});
+		}
+
+		handleDeleteButtons();
+
+    </script>
 
 {% endblock %}

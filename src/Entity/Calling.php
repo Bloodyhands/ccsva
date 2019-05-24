@@ -26,7 +26,7 @@ class Calling
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $date;
+    protected $dateMatch;
 
 	/**
 	 * @ORM\Column(type="boolean")
@@ -44,7 +44,7 @@ class Calling
     protected $teams;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $info;
 
@@ -53,11 +53,32 @@ class Calling
      */
     private $place;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $dateMeet;
+
     public function __construct()
     {
         $this->staffs = new ArrayCollection();
         $this->teams = new ArrayCollection();
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function getDateMatch()
+	{
+		return $this->dateMatch;
+	}
+
+	/**
+	 * @param mixed $dateMatch
+	 */
+	public function setDateMatch($dateMatch): void
+	{
+		$this->dateMatch = $dateMatch;
+	}
 
     public function getId(): ?int
     {
@@ -72,18 +93,6 @@ class Calling
     public function setCompetition(string $competition): self
     {
         $this->competition = $competition;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }
@@ -145,16 +154,16 @@ class Calling
     }
 
 	public function getHome(): ?bool
-                  	{
-                  		return $this->home;
-                  	}
+                           	{
+                           		return $this->home;
+                           	}
 
 	public function setHome(bool $home): self
-                  	{
-                  		$this->home = $home;
-                  
-                  		return $this;
-                  	}
+                           	{
+                           		$this->home = $home;
+                           
+                           		return $this;
+                           	}
 
     public function getInfo(): ?string
     {
@@ -176,6 +185,18 @@ class Calling
     public function setPlace(?string $place): self
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    public function getDateMeet(): ?\DateTimeInterface
+    {
+        return $this->dateMeet;
+    }
+
+    public function setDateMeet(\DateTimeInterface $dateMeet): self
+    {
+        $this->dateMeet = $dateMeet;
 
         return $this;
     }

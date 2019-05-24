@@ -8,79 +8,12 @@
         <h4>Administration du site</h4>
     </div>
     <div class="row admin mt-5 mb-4">
-        <div class="col-6 text-center">
-            <div class="card bg-light mb-3" style="max-width: 40rem;">
-                <div class="card-header"><strong>Fiches joueurs et encadrements</strong></div>
-                <div class="card-body">
-                    <a href="{{ path('admin_staff_new') }}" class="btn btn-success" role="button"><i class="fas fa-check"></i> Nouveau joueur ou encadrant</a>
-                        <div class="form-row align-items-center justify-content-center">
-                            {{ form_start(form) }}
-                            {{ form_widget(form) }}
-                            <div class="col-auto my-1">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
-                            </div>
-                            {{ form_end(form) }}
-
-                        </div>
-
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Supprimer</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 text-center">
-            <div class="card bg-light mb-3" style="max-width: 40rem;">
-                <div class="card-header"><strong>Convocation</strong></div>
-                <div class="card-body">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Nouvelle convocation</button>
-                    <form>
-                        <div class="form-row align-items-center justify-content-center">
-                            <div class="col-auto my-1">
-                                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">staff</label>
-                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                    <option selected>Sénior A</option>
-                                    <option>#</option>
-                                </select>
-                            </div>
-                            <div class="col-auto my-1">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        {% include 'admin/staff/card.html.twig' %}
+        {% include 'admin/calling/card.html.twig' %}
     </div>
     <div class="row admin">
-        <div class="col-6 text-center">
-            <div class="card bg-light mb-3" style="max-width: 40rem;">
-                <div class="card-header"><strong>Matchs</strong></div>
-                <div class="card-body">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> Nouveau match</button>
-                    <form>
-                        <div class="form-row align-items-center justify-content-center">
-                            <div class="col-auto my-1">
-                                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">staff</label>
-                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                    <option selected>Sélectionner le match à mettre à jour</option>
-                                    <option>#</option>
-                                </select>
-                            </div>
-                            <div class="col-auto my-1">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i> Modifier</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 text-center">
-            <div class="card bg-light mb-3" style="max-width: 40rem;">
-                <div class="card-header"><strong>Classement</strong></div>
-                <div class="card-body">
-                    <button type="submit" class="btn btn-success">Mettre à jour le classement</button>
-                </div>
-            </div>
-        </div>
+       {#{% include 'admin/match/card.html.twig' %}
+       {% include 'admin/ranking/card.html.twig' %}#}
     </div>
 
 {% endblock %}

@@ -31,7 +31,7 @@ class SendEmail
 	 */
 	public function mail(Calling $calling, Staff $staff)
 	{
-		$message = (new \Swift_Message('Convocation pour le match du'.' '.$calling->getDate()))
+		$message = (new \Swift_Message('Convocation pour le match du'.' '.$calling->getDateMatch()))
 			->setFrom('mathieu_franon@outlook.fr')
 			->setTo($staff->getEmail())
 			->setBody(

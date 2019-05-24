@@ -4,7 +4,7 @@ namespace App\Form\Collection;
 
 use App\Entity\Staff;
 use App\Form\Configuration\ApplicationType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,9 +13,16 @@ class StaffCallingType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', ChoiceType::class, $this->getConfiguration('Joueur n°', '', [
-
-			]))
+			->add('staff', EntityType::class, [
+				'class' => Staff::class,
+				'choice_label' => function ($staff) {
+					return $staff->getFirstname().' '.$staff->getName();
+				},
+				'expanded' => false,
+				'multiple' => false,
+				'label' => false,
+				'mapped' => false
+			])
         ;
     }
 

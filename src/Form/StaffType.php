@@ -19,7 +19,8 @@ class StaffType extends ApplicationType
 			->add('name', TextType::class, $this->getConfiguration('Nom', ''))
 			->add('firstname', TextType::class, $this->getConfiguration('Prénom', ''))
 			->add('email', EmailType::class, $this->getConfiguration('Email', ''))
-			->add('birthdate', BirthdayType::class, $this->getConfiguration('Date de naissance', ''))
+			->add('birthdate', BirthdayType::class, $this->getConfiguration('Date de naissance', '', [
+				'format' => 'dd-MM-yyyy']))
 			->add('position', ChoiceType::class, $this->getConfiguration('Position', '', [
 				'choices' => [
 					'Entraineur' => 0,

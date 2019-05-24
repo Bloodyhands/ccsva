@@ -53,6 +53,16 @@ class Team
      */
     protected $callings;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $opponent;
+
     public function __construct()
     {
         $this->staffs = new ArrayCollection();
@@ -189,6 +199,30 @@ class Team
         if ($this->callings->contains($calling)) {
             $this->callings->removeElement($calling);
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getOpponent(): ?bool
+    {
+        return $this->opponent;
+    }
+
+    public function setOpponent(bool $opponent): self
+    {
+        $this->opponent = $opponent;
 
         return $this;
     }

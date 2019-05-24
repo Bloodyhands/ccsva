@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Calling;
 use App\Entity\Staff;
+use App\Entity\Team;
 use App\Form\CallingType;
 use App\Service\SendEmail;
 use DateTime;
@@ -25,33 +26,37 @@ class AdminCallingController extends AbstractController
 	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
 	 * @throws \Exception
 	 */
-	public function newCalling(Request $request, ObjectManager $manager, SendEmail $sendEmail)
+	public function newCalling(Request $request, ObjectManager $manager/*, SendEmail $sendEmail*/)
 	{
 		$calling = new Calling();
-		$createdAt = new DateTime();
-		$staff = new Staff();
+		$team = new Team();
+		$calling->addTeam($team);
+		$team2 = new Team();
+		$calling->addTeam($team2);
 
 		$form = $this->createForm(CallingType::class, $calling);
 
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()){
-
 			foreach ($calling->getStaffs() as $staff) {
-				$staff->setCalling($calling);
-				$calling->addTicket($staff);
-				$calling->getCreatedAt($createdAt);
+				$staff->setCallings($calling);
 				$manager->persist($staff);
 			}
 			$manager->persist($calling);
 			$manager->flush();
 
+			$this->addFlash(
+				'success',
+				"La convocation a bien été envoyée"
+			);
+
 			return $this->redirectToRoute('admin');
 		}
-		$sendEmail->mail($calling, $staff);
+		//$sendEmail->mail($calling, $staff);
 
 		return $this->render('admin/calling/new.html.twig', array(
-			'form' => $form->createView(),
+			'form' => $form->createView()
 		));
 	}
 }

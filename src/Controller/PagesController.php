@@ -16,14 +16,4 @@ class PagesController extends AbstractController
 	{
 		return $this->render('/home.html.twig', ['title' => "Bienvenue"]);
 	}
-
-	/**
-	 * Accès à la page photos
-	 *
-	 * @Route("/photo", name="photo")
-	 */
-	public function photo()
-	{
-		return $this->render('/photo.html.twig');
-	}
 }
