@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Staff;
+use App\Form\AdminPage\AdminCallingType;
 use App\Form\AdminPage\AdminStaffType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,17 +16,27 @@ class AdminController extends AbstractController
 	 */
 	public function admin(Request $request)
 	{
-		$form = $this->createForm(AdminStaffType::class);
+		$formStaff = $this->createForm(AdminStaffType::class);
+		$formStaff->handleRequest($request);
 
-		$form->handleRequest($request);
-
-		if ($form->isSubmitted() && $form->isValid()) {
+		if ($formStaff->isSubmitted() && $formStaff->isValid()) {
 			return $this->redirectToRoute('admin_staff_edit', [
-				'id' => $form->get('staff')->getData()->getId()
+				'id' => $formStaff->get('staff')->getData()->getId()
 			]);
 		}
+
+		$formCalling = $this->createForm(AdminCallingType::class);
+		$formCalling->handleRequest($request);
+
+		if ($formCalling->isSubmitted() && $formCalling->isValid()) {
+			return $this->redirectToRoute('admin_calling_edit', [
+				'id' => $formCalling->get('calling')->getData()->getId()
+			]);
+		}
+
 		return $this->render('admin/admin.html.twig', [
-			'form' => $form->createView()
+			'formStaff' => $formStaff->createView(),
+			'formCalling' => $formCalling->createView()
 		]);
 	}
 }
