@@ -64,14 +64,6 @@ class Staff
      */
     protected $callings;
 
-	/**
-	 * @param mixed $callings
-	 */
-	public function setCallings($callings): void
-	{
-		$this->callings = $callings;
-	}
-
     public function __construct()
     {
         $this->teams = new ArrayCollection();

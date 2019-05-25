@@ -43,7 +43,7 @@ class AdminCallingController extends AbstractController
 
 		if ($form->isSubmitted() && $form->isValid()){
 			foreach ($calling->getStaffs() as $staff) {
-				$staff->setCallings($calling);
+				$staff->addCalling($calling);
 				$manager->persist($staff);
 			}
 			$manager->persist($calling);
