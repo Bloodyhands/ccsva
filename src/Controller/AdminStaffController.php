@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Staff;
 use App\Form\StaffType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +17,8 @@ class AdminStaffController extends AbstractController
 	 * Permet l'ajout de joueurs et encadrants
 	 *
 	 * @Route("/admin/staff/new", name="admin_staff_new")
+	 *
+	 * @IsGranted("ROLE_ADMIN")
 	 *
 	 * @return Response
 	 */
@@ -46,6 +49,8 @@ class AdminStaffController extends AbstractController
 	 *
 	 * @Route("/admin/staff/{id}/edit", name="admin_staff_edit")
 	 *
+	 * @IsGranted("ROLE_ADMIN")
+	 *
 	 * @param Staff $staff
 	 * @return Response
 	 */
@@ -75,6 +80,8 @@ class AdminStaffController extends AbstractController
 	 * Permet de supprimer des joueurs en encadrants
 	 *
 	 * @Route("/admin/staff/{id}/delete", name="admin_staff_delete")
+	 *
+	 * @IsGranted("ROLE_ADMIN")
 	 *
 	 * @param Staff $staff
 	 * @param ObjectManager $manager

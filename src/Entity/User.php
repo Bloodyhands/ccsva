@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -20,11 +21,15 @@ class User implements UserInterface
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\Length(min=2, max=15, minMessage="Votre nom doit faire au moins 2 caractères", maxMessage="Votre nom doit faire 15 caractères maximum")
 	 */
 	protected $name;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\Length(min=2, max=15, minMessage="Votre prénom doit faire au moins 2 caractères", maxMessage="Votre prénom doit faire 15 caractères maximum")
 	 */
 	protected $firstname;
 
@@ -35,6 +40,13 @@ class User implements UserInterface
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\NotBlank
+	 *
+	 * @Assert\Email(
+	 *     message = "L'email n'est pas valide",
+	 *     checkMX = true
+	 * )
 	 */
 	protected $email;
     /**
@@ -45,6 +57,13 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+	 *
+	 * @Assert\NotBlank
+	 * @Assert\Length(min=2, max=15, minMessage="Votre mot de passe doit faire au moins 4 caractères", maxMessage="Votre mot de passe doit faire 15 caractères maximum")
+	 * @SecurityAssert\UserPassword(
+	 *     message = "Votre mot de passe n'est pas le bon"
+	 * )
+	 *
      */
     private $password;
 

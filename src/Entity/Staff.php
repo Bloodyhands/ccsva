@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -20,25 +21,36 @@ class Staff
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\Length(min=2, max=15, minMessage="Le nom doit faire au moins 2 caractères", maxMessage="Le nom doit faire 15 caractères maximum")
 	 */
 	protected $name;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\Length(min=2, max=15, minMessage="Le nom doit faire au moins 2 caractères", maxMessage="Le nom doit faire 15 caractères maximum")
 	 */
 	protected $firstname;
 
 	/**
 	 * @ORM\Column(type="date")
+	 *
 	 */
 	protected $birthdate;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
+	 *
+	 * @Assert\Email(
+	 *     message = "L'email n'est pas valide",
+	 *     checkMX = true
+	 * )
 	 */
 	protected $email;
     /**
      * @ORM\Column(type="string", length=255)
+	 *
      */
     protected $position;
 
