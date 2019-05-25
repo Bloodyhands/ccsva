@@ -9,6 +9,7 @@ use App\Form\CallingType;
 use App\Service\SendEmail;
 use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,8 @@ class AdminCallingController extends AbstractController
 	 * Permet la création de nouvelle convocation
 	 *
 	 * @Route("/admin/convocation/new", name="admin_calling_new")
+	 *
+	 * @IsGranted("ROLE_ADMIN")
 	 *
 	 * @param Request $request
 	 * @param ObjectManager $manager
@@ -40,7 +43,7 @@ class AdminCallingController extends AbstractController
 
 		if ($form->isSubmitted() && $form->isValid()){
 			foreach ($calling->getStaffs() as $staff) {
-				$staff->setCallings($calling);
+				$staff->addCalling($calling);
 				$manager->persist($staff);
 			}
 			$manager->persist($calling);

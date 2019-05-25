@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Staff;
 use App\Form\AdminPage\AdminCallingType;
 use App\Form\AdminPage\AdminStaffType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,8 @@ class AdminController extends AbstractController
 {
 	/**
 	 * @Route("/admin", name="admin")
+	 *
+	 * @IsGranted("ROLE_ADMIN")
 	 */
 	public function admin(Request $request)
 	{

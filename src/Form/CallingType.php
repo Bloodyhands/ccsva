@@ -44,7 +44,6 @@ class CallingType extends ApplicationType
 				'label' => false
 			]))
 			->add('dateMatch', DateTimeType::class, $this->getConfiguration('Date et heure du match', '', [
-				'format' => 'dd-MM-yyyy'
 			]))
 			->add('place', TextType::class, $this->getConfiguration('Lieu du RDV', ''))
 			->add('dateMeet', TimeType::class, $this->getConfiguration('Heure du RDV', ''))

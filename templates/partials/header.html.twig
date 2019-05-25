@@ -3,13 +3,10 @@
         <div class="col-1">
             <img src="{{ asset('logocsv.png') }}" alt="logocsv">
         </div>
-        <div class="col-11">
+        <div class="col-10 col-md-11">
             <div class="row">
-                <div class="col-10 col-md-11 text-center">
+                <div class="col-12 text-center">
                     <h1>CCSVA MONT-SOUS-VAUDREY FOOTBALL</h1>
-                </div>
-                <div class="col-2 col-md-1" id="fb">
-                    <a href="https://www.facebook.com/CCSVA-1682686888654597/"><i class="fab fa-facebook"></i></a>
                 </div>
             </div>
             <div class="row mt-4" id="menu">
@@ -19,7 +16,7 @@
                             <a class="nav-link" href="{{ path('home') }}">ACCUEIL<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">LE CLUB</a>
+                            <a class="nav-link" href="{{ path('staff') }}">LES JOUEURS</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">LES EQUIPES</a>
